@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router-dom'
 
 import { Login, Sample } from 'src/app/pages'
 
+import { TablePage } from 'src/app/pages/'
+
 import {
   ProtectedAuth,
   PublicAuth,
@@ -26,6 +28,8 @@ export const Router: RouteObject[] = [
         path: '/login',
         element: <Login />,
       },
+
+      { path: '/table', element: <TablePage /> },
     ],
   },
   // {
