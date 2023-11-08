@@ -1,16 +1,14 @@
 import React, { useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { IoMdEye, IoMdListBox } from 'react-icons/io'
 import { MdEdit, MdViewAgenda } from 'react-icons/md'
 import { RiDeleteBin5Fill } from 'react-icons/ri'
 
-import { Loader } from 'src/app/common'
+import { Loader, Tooltip } from 'src/app/common'
 import { Pagination } from 'src/app/components'
 
 import { getParsedQuery } from 'src/helpers'
 import { useQuery } from 'src/hooks'
-import { ActionButton } from './table.style'
 
 function stableSort<T>(
   array: readonly T[],
@@ -248,40 +246,49 @@ export const Table = <T, K extends Extract<keyof T, string>>({
 
                   {actions?.onEdit && (
                     <td>
-                      <ActionButton
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          actions?.onEdit?.(item)
-                        }}
-                      >
-                        <MdEdit size={22} />
-                      </ActionButton>
+                      <Tooltip position="top" title="Edit Item">
+                        <div
+                          className="action-button"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            actions?.onEdit?.(item)
+                          }}
+                        >
+                          <MdEdit size={22} />
+                        </div>
+                      </Tooltip>
                     </td>
                   )}
 
                   {actions?.onDelete && (
                     <td>
-                      <ActionButton
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          actions?.onDelete?.(item)
-                        }}
-                      >
-                        <RiDeleteBin5Fill size={22} />
-                      </ActionButton>
+                      <Tooltip title="Delete Item">
+                        <div
+                          className="action-button"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            actions?.onDelete?.(item)
+                          }}
+                        >
+                          <RiDeleteBin5Fill size={22} />
+                        </div>
+                      </Tooltip>
                     </td>
                   )}
 
                   {actions?.onView && (
                     <td>
-                      <ActionButton
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          actions?.onView?.(item)
-                        }}
-                      >
-                        <MdViewAgenda size={22} />
-                      </ActionButton>
+                      <Tooltip title="View Item">
+                        <div
+                          className="action-button"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            actions?.onView?.(item)
+                          }}
+                        >
+                          <MdViewAgenda size={22} />
+                        </div>
+                      </Tooltip>
                     </td>
                   )}
                 </tr>
