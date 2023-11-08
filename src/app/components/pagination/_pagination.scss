@@ -2,7 +2,12 @@ $cell-size: 40px; // The size of each pagination item
 
 .pagination {
   display: flex;
+  justify-content: space-between;
   column-gap: map-get($map: $space, $key: 2);
+  min-width: fit-content;
+  width: 300px;
+  user-select: none; // disable text selection
+
   .pagination-cell {
     display: flex;
     align-items: center;
@@ -13,7 +18,7 @@ $cell-size: 40px; // The size of each pagination item
     height: $cell-size;
     border-radius: 100%;
     cursor: pointer;
-
+    margin-left: 5px;
     &:hover {
       background-color: $orange;
       color: white;
@@ -22,5 +27,25 @@ $cell-size: 40px; // The size of each pagination item
       background-color: $orange;
       color: white;
     }
+
+    &--disabled {
+      cursor: not-allowed;
+      &:hover {
+        background-color: white;
+        color: #000;
+      }
+    }
+  }
+
+  .sectionedpagination {
+    display: flex;
+  }
+
+  .separator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+    margin: 10px;
   }
 }

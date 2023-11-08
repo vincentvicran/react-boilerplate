@@ -309,7 +309,7 @@ export const Table = <T, K extends Extract<keyof T, string>>({
             totalItem={data.length}
             itemPerPage={pagination?.perPage ?? 10}
             onPageChange={handlePageChange}
-            active={Number(page)}
+            activePage={Number(page)}
           />
         </div>
       ) : null}

@@ -98,7 +98,7 @@ export function TablePage() {
 
   return (
     <Table
-      pagination={{ perPage: 5 }}
+      pagination={{ perPage: 1 }}
       actions={{
         onEdit: editHandler,
         onDelete: deleteHandler,
