@@ -1,6 +1,7 @@
 $cell-size: 40px; // The size of each pagination item
 
 .pagination {
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   column-gap: map-get($map: $space, $key: 2);

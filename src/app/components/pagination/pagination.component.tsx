@@ -25,17 +25,25 @@ export function Pagination(props: PaginationProps) {
   }, [numOfPages])
 
   // The number of elements for slicing the pagination
-  const startingOffset = 4
+  const startingOffset = 5
+  const endingOffset = pages.length - 4
 
   const [slicedPagination, setSlicedPagination] = useState([[0], [0], [0]])
 
+  // if number of post changes but user is still on previous page
+  useEffect(() => {
+    if (activePage > numOfPages) {
+      onPageChange(numOfPages)
+    }
+  }, [activePage, numOfPages, onPageChange])
+
   useEffect(() => {
     let startingArrayTemp = pages.slice(0, startingOffset)
-    let endingArrayTemp = pages.slice(-startingOffset, pages.length)
+    let endingArrayTemp = pages.slice(endingOffset, pages.length)
     let currentArrayTemp: number[] = []
 
     // if there are only 5 pages, dont produce ending arrays
-    if (pages.length < startingOffset) {
+    if (pages.length <= startingOffset) {
       startingArrayTemp = [...pages]
       endingArrayTemp = []
     }
@@ -43,12 +51,15 @@ export function Pagination(props: PaginationProps) {
     // If current page is in starting array or ending array,
     // then no need of miffle section
 
-    if (endingArrayTemp.includes(activePage)) {
+    if (startingArrayTemp.includes(activePage)) {
+      currentArrayTemp = []
+      endingArrayTemp =
+        endingArrayTemp[endingArrayTemp.length - 1] === undefined
+          ? []
+          : [endingArrayTemp[endingArrayTemp.length - 1]]
+    } else if (endingArrayTemp.includes(activePage)) {
       currentArrayTemp = []
       startingArrayTemp = [startingArrayTemp[0]]
-    } else if (startingArrayTemp.includes(activePage)) {
-      currentArrayTemp = []
-      endingArrayTemp = [endingArrayTemp[endingArrayTemp.length - 1]]
     } else {
       currentArrayTemp = [activePage - 1, activePage, activePage + 1]
       startingArrayTemp = [startingArrayTemp[0]]
@@ -60,11 +71,7 @@ export function Pagination(props: PaginationProps) {
       [...endingArrayTemp],
     ]
     setSlicedPagination(newSlicedArray)
-  }, [pages, startingOffset, activePage])
-
-  useEffect(() => {
-    console.log(slicedPagination)
-  }, [slicedPagination])
+  }, [pages, startingOffset, activePage, endingOffset])
 
   return (
     <div className="pagination">
@@ -80,30 +87,44 @@ export function Pagination(props: PaginationProps) {
       </div>
 
       {slicedPagination.map((sectionedPage, index) => {
-        if (sectionedPage.length === 0) {
-          return <div className="separator">...</div>
+        if (sectionedPage.length <= 0) {
+          return (
+            <>
+              {numOfPages > startingOffset && (
+                <div className="separator">...</div>
+              )}
+            </>
+          )
         } else {
           return (
-            <div className="sectionedpagination">
-              {index === 1 && <div className="separator">...</div>}
-              {sectionedPage.map((pageNumber) => {
-                return (
-                  <div
-                    key={pageNumber}
-                    className={`pagination-cell ${
-                      activePage === pageNumber ? 'pagination-cell--active' : ''
-                    }`}
-                    onClick={() => {
-                      onPageChange(pageNumber)
-                    }}
-                  >
-                    {pageNumber}
-                  </div>
-                )
-              })}
+            <>
+              {index === 1 && sectionedPage.length > 0 && (
+                <div className="separator">...</div>
+              )}
+              <div className="sectionedpagination">
+                {sectionedPage.map((pageNumber) => {
+                  return (
+                    <div
+                      key={pageNumber}
+                      className={`pagination-cell ${
+                        activePage === pageNumber
+                          ? 'pagination-cell--active'
+                          : ''
+                      }`}
+                      onClick={() => {
+                        onPageChange(pageNumber)
+                      }}
+                    >
+                      {pageNumber}
+                    </div>
+                  )
+                })}
+              </div>
 
-              {index === 1 && <div className="separator">...</div>}
-            </div>
+              {index === 1 && sectionedPage.length > 0 && (
+                <div className="separator">...</div>
+              )}
+            </>
           )
         }
       })}
