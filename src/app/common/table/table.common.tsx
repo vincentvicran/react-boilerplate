@@ -36,16 +36,26 @@ function stableSort<T>(
 
 function descendingComparator<T>(a: T, b: T, orderBy?: keyof T) {
   if (orderBy) {
-    // @ts-ignore
-    const initial = a[orderBy]?.toLowerCase()
-    // @ts-ignore
-    const eventual = b[orderBy]?.toLowerCase()
+    if (typeof a[orderBy] === 'string') {
+      // @ts-ignore
+      const initial = a[orderBy]?.toLowerCase()
+      // @ts-ignore
+      const eventual = b[orderBy]?.toLowerCase()
 
-    if (eventual < initial) {
-      return -1
-    }
-    if (eventual > initial) {
-      return 1
+      if (eventual < initial) {
+        return -1
+      }
+      if (eventual > initial) {
+        return 1
+      }
+    } else if (typeof a[orderBy] === 'number') {
+      if (a[orderBy] < b[orderBy]) {
+        return -1
+      }
+
+      if (a[orderBy] > b[orderBy]) {
+        return 1
+      }
     }
   }
   return 0
