@@ -1,23 +1,16 @@
 import React, { useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import {
-  TableContainer as MaterialTableContainer,
-  Table as MaterialTable,
-  TableBody as MaterialTableBody,
-  TableHead as MaterialTableHead,
-  TableRow as MaterialTableRow,
-  Paper as MaterialPaper,
-  Pagination as MaterialPagination,
-  TableSortLabel,
-} from '@mui/material'
-import { IoMdListBox } from 'react-icons/io'
-import { MdEdit } from 'react-icons/md'
+
+import { IoMdEye, IoMdListBox } from 'react-icons/io'
+import { MdEdit, MdViewAgenda } from 'react-icons/md'
 import { RiDeleteBin5Fill } from 'react-icons/ri'
 
 import { Loader } from 'src/app/common'
+import { Pagination } from 'src/app/components'
 
 import { getParsedQuery } from 'src/helpers'
 import { useQuery } from 'src/hooks'
+import { ActionButton } from './table.style'
 
 function stableSort<T>(
   array: readonly T[],
@@ -104,14 +97,13 @@ export const Table = <T, K extends Extract<keyof T, string>>({
   data: Array<T>
   actions?: {
     onEdit?: (item: T) => void
-    onDelete?: (item: T, onCloseModalHandler: any) => void
+    onDelete?: (item: T) => void
     onView?: (item: T) => void
   }
   loading?: boolean
 
   pagination?: {
     perPage?: number
-    totalCount: number
   }
   disableNoData?: boolean
   onPageChange?: (page: number) => void
@@ -157,254 +149,164 @@ export const Table = <T, K extends Extract<keyof T, string>>({
           ),
     [data, order, orderBy, page, pagination],
   )
-  // TODO: Create actions cells
+
+  const handlePageChange = (newPage: number) => {
+    onChange(newPage)
+  }
+
+  // TODO: Create pagination and action modal
+
   return (
-    <table className={`data-table ${stripped && 'data-table--stripped'}`}>
-      {/* This is table heading */}
-      <thead>
-        <tr>
-          {columns.map((item, i) => {
-            if (item.name) {
-              return (
-                <th
-                  style={item?.colStyle}
-                  key={i}
-                  align={`${i === 1 ? 'left' : 'center'}`}
-                >
-                  {!item.sortable ? (
-                    item.name
-                  ) : (
-                    <TableSortLabel
-                      active={orderBy === item.field}
-                      direction={orderBy === item.field ? order : 'asc'}
-                      onClick={() => handleRequestSort(item.field)}
-                    >
-                      {item.name}
-                    </TableSortLabel>
-                  )}
-                </th>
-              )
-            } else {
-              return (
-                <th
-                  style={item.colStyle}
-                  key={i}
-                  align={`${i === 1 ? 'left' : 'center'}`}
-                >
-                  {!item.sortable ? (
-                    item.field
-                  ) : (
-                    <TableSortLabel
-                      active={orderBy === item.field}
-                      direction={orderBy === item.field ? order : 'asc'}
-                      onClick={() => handleRequestSort(item.field)}
-                    >
-                      {item.field}
-                    </TableSortLabel>
-                  )}
-                </th>
-              )
-            }
-          })}
-          {actions ? <th align="center">Actions</th> : null}
-        </tr>
-      </thead>{' '}
-      {/* Table body starts here */}
-      {loading ? (
-        <tbody>
+    <div>
+      <table className={`data-table ${stripped && 'data-table--stripped'}`}>
+        {/* This is table heading */}
+        <thead>
           <tr>
-            <td
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-                height: '100px',
-              }}
-            >
-              <Loader variant="three" color="#0051ff" size={26} />
-            </td>
+            {columns.map((item, i) => {
+              if (item.name) {
+                return (
+                  <th style={item?.colStyle} key={i} align="center">
+                    {!item.sortable ? (
+                      item.name
+                    ) : (
+                      <div onClick={() => handleRequestSort(item.field)}>
+                        {item.name}
+                      </div>
+                    )}
+                  </th>
+                )
+              } else {
+                return (
+                  <th
+                    style={item.colStyle}
+                    key={i}
+                    align={`${i === 1 ? 'left' : 'center'}`}
+                  >
+                    {!item.sortable ? (
+                      item.field
+                    ) : (
+                      <div onClick={() => handleRequestSort(item.field)}>
+                        {item.field}
+                      </div>
+                    )}
+                  </th>
+                )
+              }
+            })}
+            {actions ? (
+              <th align="center" colSpan={Object.keys(actions).length}>
+                Actions
+              </th>
+            ) : null}
           </tr>
-        </tbody>
-      ) : data?.length > 0 ? (
-        <tbody>
-          {visibleRows?.map((item: any, index) => {
-            return (
-              <tr
-                key={index}
-                className={
-                  !!selectParams?.multiple?.value?.find(
-                    (itm) => itm === item[selectParams?.multiple?.key],
-                  )
-                    ? 'selected'
-                    : item[selectParams?.specific?.key] ===
-                      selectParams?.specific?.value
-                    ? 'highlighted'
-                    : ''
-                }
-              >
-                {columns.map((col, i) => {
-                  if (col.render) {
-                    return (
-                      <td key={i} align={`${i === 1 ? 'left' : 'center'}`}>
-                        {col.render(
-                          col.field ? item[col.field] : item,
-                          item,
-                          index,
-                        )}
-                      </td>
+        </thead>{' '}
+        {/* Table body starts here */}
+        {loading ? (
+          <tbody>
+            <tr>
+              <td>
+                <Loader variant="three" color="#0051ff" size={26} />
+              </td>
+            </tr>
+          </tbody>
+        ) : data?.length > 0 ? (
+          <tbody>
+            {visibleRows?.map((item: any, index) => {
+              return (
+                <tr
+                  key={index}
+                  className={
+                    !!selectParams?.multiple?.value?.find(
+                      (itm) => itm === item[selectParams?.multiple?.key],
                     )
-                  } else {
-                    return (
-                      <td key={i} align={`${i === 1 ? 'left' : 'center'}`}>
-                        {col.field ? item[col.field] : (item as any)}
-                      </td>
-                    )
+                      ? 'selected'
+                      : item[selectParams?.specific?.key] ===
+                        selectParams?.specific?.value
+                      ? 'highlighted'
+                      : ''
                   }
-                })}
-                {actions ? (
-                  // <td align="center" width={50}>
-                  //   <HStack gap="$3">
-                  //     {actions?.onView && (
-                  //       <ToolTip text="View">
-                  //         <ActionButton
-                  //           onClick={(e) => {
-                  //             e.stopPropagation()
-                  //             actions?.onView?.(item)
-                  //           }}
-                  //         >
-                  //           <IoMdListBox
-                  //             color={
-                  //               !!actionIconColor
-                  //                 ? actionIconColor
-                  //                 : colors.defaultIconColor
-                  //             }
-                  //             size={22}
-                  //           />
-                  //         </ActionButton>
-                  //       </ToolTip>
-                  //     )}
+                >
+                  {columns.map((col, i) => {
+                    if (col.render) {
+                      return (
+                        <td key={i}>
+                          {col.render(
+                            col.field ? item[col.field] : item,
+                            item,
+                            index,
+                          )}
+                        </td>
+                      )
+                    } else {
+                      return (
+                        <td key={i}>
+                          {col.field ? item[col.field] : (item as any)}
+                        </td>
+                      )
+                    }
+                  })}
 
-                  //     {actions?.onEdit && (
-                  //       <ToolTip text="Edit">
-                  //         <ActionButton
-                  //           onClick={(e) => {
-                  //             e.stopPropagation()
-                  //             actions?.onEdit?.(item)
-                  //           }}
-                  //         >
-                  //           <MdEdit
-                  //             color={
-                  //               !!actionIconColor
-                  //                 ? actionIconColor
-                  //                 : colors.defaultIconColor
-                  //             }
-                  //             size={22}
-                  //           />
-                  //         </ActionButton>
-                  //       </ToolTip>
-                  //     )}
+                  {actions?.onEdit && (
+                    <td>
+                      <ActionButton
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          actions?.onEdit?.(item)
+                        }}
+                      >
+                        <MdEdit size={22} />
+                      </ActionButton>
+                    </td>
+                  )}
 
-                  //     {actions?.onDelete && (
-                  //       <ToolTip text="Delete">
-                  //         {disableActions ? (
-                  //           <RiDeleteBin5Fill
-                  //             color={
-                  //               !!actionIconColor
-                  //                 ? actionIconColor
-                  //                 : colors.defaultIconColor
-                  //             }
-                  //             size={22}
-                  //           />
-                  //         ) : (
-                  //           <ConfirmationModal
-                  //             label={`Do you want to delete this ${
-                  //               item.name
-                  //             } ${item.isFile ? 'file' : 'folder'} ?`}
-                  //             danger
-                  //             cancelLabel="Cancel"
-                  //             confirmLabel="Delete"
-                  //             onConfirmClick={(onCloseModalHandler) =>
-                  //               actions?.onDelete?.(item, onCloseModalHandler)
-                  //             }
-                  //             displayElement={
-                  //               <ActionButton className="action-delete">
-                  //                 <RiDeleteBin5Fill
-                  //                   color={
-                  //                     !!actionIconColor
-                  //                       ? actionIconColor
-                  //                       : colors.defaultIconColor
-                  //                   }
-                  //                   size={22}
-                  //                 />
-                  //               </ActionButton>
-                  //             }
-                  //           />
-                  //         )}
-                  //       </ToolTip>
-                  //     )}
+                  {actions?.onDelete && (
+                    <td>
+                      <ActionButton
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          actions?.onDelete?.(item)
+                        }}
+                      >
+                        <RiDeleteBin5Fill size={22} />
+                      </ActionButton>
+                    </td>
+                  )}
 
-                  //     {/* {actionsRef.current?.onDelete && (
-                  //         <ToolTip text="Delete">
-                  //           <Modal
-                  //             tdigger={() => (
-                  //               <ActionButton className="action-delete">
-                  //                 <AiFillDelete size={22} />
-                  //               </ActionButton>
-                  //             )}
-                  //           >
-                  //             {(modal) => (
-                  //               <VStack gap="$4">
-                  //                 <div
-                  //                   style={{
-                  //                     fontWeight: 'bold'
-                  //                   }}
-                  //                 >
-                  //                   Are you sure you want to delete ?
-                  //                 </div>
-                  //                 <HStack gap="$2" justify="end">
-                  //                   <Button
-                  //                     variant="outlined"
-                  //                     color="default"
-                  //                     onClick={(e) => {
-                  //                       e.preventDefault()
-                  //                       modal.close()
-                  //                     }}
-                  //                   >
-                  //                     Cancel
-                  //                   </Button>
-                  //                   <Button
-                  //                     color="error"
-                  //                     onClick={(e) => {
-                  //                       e.preventDefault()
-                  //                       actionsRef.current?.onDelete?.(item)
-                  //                       modal.close()
-                  //                     }}
-                  //                   >
-                  //                     Delete
-                  //                   </Button>
-                  //                 </HStack>
-                  //               </VStack>
-                  //             )}
-                  //           </Modal>
-                  //         </ToolTip>
-                  //       )} */}
-                  //   </HStack>
-                  // </td>
-                  <></>
-                ) : null}
-              </tr>
-            )
-          })}
-        </tbody>
-      ) : disableNoData ? null : (
-        <tbody>
-          <tr>
-            <tr aria-colspan={columns.length + 1}>No data</tr>
-          </tr>
-        </tbody>
-      )}
-    </table>
+                  {actions?.onView && (
+                    <td>
+                      <ActionButton
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          actions?.onView?.(item)
+                        }}
+                      >
+                        <MdViewAgenda size={22} />
+                      </ActionButton>
+                    </td>
+                  )}
+                </tr>
+              )
+            })}
+          </tbody>
+        ) : disableNoData ? null : (
+          <tbody>
+            <tr>
+              <tr aria-colspan={columns.length + 1}>No data</tr>
+            </tr>
+          </tbody>
+        )}
+      </table>
+      {!loading && data?.length > 0 && pagination ? (
+        <div className="table-pagination">
+          <Pagination
+            totalItem={data.length}
+            itemPerPage={pagination?.perPage ?? 10}
+            onPageChange={handlePageChange}
+            active={Number(page)}
+          />
+        </div>
+      ) : null}
+    </div>
   )
 
   // return (

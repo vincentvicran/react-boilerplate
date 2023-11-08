@@ -15,8 +15,8 @@ $table-primary-bg: #f0f0f0;
   }
 
   tr {
-    td,
-    th {
+    th,
+    td {
       padding: 10px;
       text-align: center;
     }
@@ -24,11 +24,22 @@ $table-primary-bg: #f0f0f0;
     th {
       cursor: pointer;
     }
+
+    td {
+    }
   }
 
   tbody {
+    color: gray;
   }
   thead {
     border-bottom: 2px solid gainsboro;
   }
+}
+
+.table-pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 10px;
 }

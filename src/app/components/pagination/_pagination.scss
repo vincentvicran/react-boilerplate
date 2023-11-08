@@ -1,0 +1,26 @@
+$cell-size: 40px; // The size of each pagination item
+
+.pagination {
+  display: flex;
+  column-gap: map-get($map: $space, $key: 2);
+  .pagination-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $defaultborder;
+    padding: 10px;
+    width: $cell-size;
+    height: $cell-size;
+    border-radius: 100%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $orange;
+      color: white;
+    }
+    &--active {
+      background-color: $orange;
+      color: white;
+    }
+  }
+}
