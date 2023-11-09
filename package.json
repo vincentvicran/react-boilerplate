@@ -14,9 +14,6 @@
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@mui/material": "^5.10.5",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
     "chroma-js": "^2.4.2",
