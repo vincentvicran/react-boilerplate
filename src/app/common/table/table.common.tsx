@@ -246,7 +246,11 @@ export const Table = <T, K extends Extract<keyof T, string>>({
 
                   {actions?.onEdit && (
                     <td>
-                      <Tooltip position="top" title="Edit Item">
+                      <Tooltip
+                        position="left"
+                        showArrow={true}
+                        title="Edit Item"
+                      >
                         <div
                           className="action-button"
                           onClick={(e) => {

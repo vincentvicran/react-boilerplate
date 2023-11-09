@@ -91,7 +91,9 @@ export function Pagination(props: PaginationProps) {
           return (
             <>
               {numOfPages > startingOffset && (
-                <div className="separator">...</div>
+                <div key={index} className="separator">
+                  ...
+                </div>
               )}
             </>
           )
