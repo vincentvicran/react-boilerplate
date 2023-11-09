@@ -32,8 +32,14 @@ export function Pagination(props: PaginationProps) {
 
   // if number of post changes but user is still on previous page
   useEffect(() => {
+    // if user is in page greater than total page, redirect him to last page
     if (activePage > numOfPages) {
       onPageChange(numOfPages)
+    }
+
+    // if user is on page 0 or less redirect him to page 1
+    if (activePage < 1) {
+      onPageChange(1)
     }
   }, [activePage, numOfPages, onPageChange])
 
