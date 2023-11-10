@@ -20,10 +20,10 @@ const MemoChild = () => {
 
 const App = () => {
   return (
-    <div>
-      <Toaster position="bottom-right" reverseOrder={false} />
+    <main className="main-app">
       {useRoutes(Router)}
-    </div>
+      <Toaster position="bottom-right" reverseOrder={false} />
+    </main>
   )
 }
 
