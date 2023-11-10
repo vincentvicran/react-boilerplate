@@ -2,6 +2,7 @@ $table-primary-bg: #f0f0f0;
 .data-table {
   width: 100%;
   background-color: $table-primary-bg;
+
   &--stripped {
     tbody {
       tr:nth-child(even) {
