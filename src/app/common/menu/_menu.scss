@@ -1,0 +1,43 @@
+.menu-container {
+  background-color: #ffffff;
+  padding: 6px 0px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid $lightBorderColor;
+  border-radius: 10px;
+  margin: 0px;
+}
+
+.menu-item {
+  padding: 10px 24px;
+  display: block;
+  background-color: white;
+  border: none;
+  outline: none;
+  // font-family: ${fonts.family.arial};
+  cursor: pointer;
+  // color: ${(props) =>
+  //   props.danger ? colors.highlightColor : colors.defaultTextColor};
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $backgroundColor;
+  }
+
+  &:active {
+    background-color: $backgroundColor;
+  }
+
+  &:focus {
+    outline: 1px solid $defaultBorderColor;
+  }
+
+  &.danger {
+    color: $highlightColor;
+  }
+}
+
+.menu-separator {
+  width: 100%;
+  border-bottom: 1px solid $backgroundColor;
+  margin: 5px 0px;
+}

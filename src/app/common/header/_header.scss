@@ -1,0 +1,292 @@
+// HEADER STYLE// HEADER STYLE
+.header-container {
+  padding-top: 10px;
+  border-bottom: 1px solid $grey300;
+  padding-bottom: 10px;
+
+  @include responsive-for(lg) {
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  @include responsive-for(md) {
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-left {
+      flex: 1;
+      display: flex;
+      align-items: center;
+
+      @include responsive-for(lg) {
+      }
+
+      @include responsive-for(sm) {
+      }
+
+      .header-menu {
+        font-size: 30px;
+        margin-right: 20px;
+        cursor: pointer;
+        transition: color 0.1s;
+        display: block;
+        position: relative;
+        top: 2px;
+        color: $black;
+        background-color: $white;
+        width: 30px;
+        min-width: 30px;
+        height: 30px;
+        min-height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border: 1px solid $grey200;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+
+        @include responsive-for(lg) {
+          display: flex;
+        }
+
+        &:hover {
+          color: $primary100;
+        }
+      }
+    }
+
+    &-right {
+      display: flex;
+      align-items: center;
+
+      .header-buttons {
+        padding-right: 10px;
+        display: flex;
+        align-items: center;
+
+        &-add {
+          background: none;
+          border: none;
+          outline: none;
+          font-size: 20px;
+          color: $grey100;
+          width: 30px;
+          height: 30px;
+          margin: 0px 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          cursor: pointer;
+          border: 1px solid $grey200;
+          transition: background 0.1s, color 0.1s;
+
+          &:hover {
+            background: $grey100;
+            color: $white;
+          }
+        }
+      }
+
+      .logged-user {
+        cursor: pointer;
+        padding-left: 20px;
+        // border-left: 2px solid $grey100;
+
+        &-container {
+          display: flex;
+          align-items: center;
+
+          .logged-user {
+            &-icon {
+              background: $white;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: $black;
+              border: 1px solid $grey200;
+              cursor: pointer;
+              box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+              transition: background 0.1s;
+            }
+
+            &-name {
+              padding: 0px 10px;
+              color: $black;
+            }
+
+            &-arrow-down {
+              color: $black;
+              position: relative;
+              top: 4px;
+            }
+          }
+        }
+
+        .menuItem {
+          font-size: 14px !important;
+          width: 100%;
+          text-align: left;
+
+          & .red {
+            color: map-get($base, 'critical') !important;
+          }
+
+          .switch-company-button {
+            padding: 0;
+            margin: 0;
+            @include flex(center, space-between, row);
+            flex-wrap: nowrap;
+            color: map-get($base, 'primary');
+            &-icon {
+              margin-top: 4px;
+            }
+          }
+
+          .back-button {
+            padding: 0;
+            margin: 0;
+            @include flex(center, flex-start, row);
+            gap: 10px;
+            flex-wrap: nowrap;
+            color: map-get($text, 'secondary');
+            &-icon {
+              margin-top: 4px;
+            }
+          }
+        }
+      }
+
+      .menu-header {
+        @include flex-stretch-start;
+        overflow: hidden;
+        width: 210px;
+        padding: 10px 20px;
+        gap: 10px;
+
+        &-avatar {
+          &-img {
+            height: 31px;
+            width: 31px;
+            border-radius: 50%;
+            border: 1px solid map-get($border, 'secondary');
+            overflow: hidden;
+            object-fit: contain;
+            object-position: center;
+          }
+        }
+
+        &-content {
+          @include flex(start, flex-start, column);
+
+          &-company-name {
+            font-size: 14px;
+            padding-bottom: 4px;
+            width: 125px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          &-user-role {
+            font-size: 12px;
+            color: map-get($text, 'disabled');
+          }
+        }
+      }
+
+      .menu-list {
+        @include flex-stretch-start;
+        overflow: hidden;
+        width: 210px;
+        padding: 10px 16px;
+        gap: 10px;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+
+        &:hover {
+          background-color: rgba(map-get($base, 'primary'), 0.11);
+        }
+
+        &-avatar {
+          &-img {
+            height: 31px;
+            width: 31px;
+            border-radius: 50%;
+            border: 1px solid map-get($border, 'secondary');
+            overflow: hidden;
+            object-fit: contain;
+            object-position: center;
+          }
+        }
+
+        &-content {
+          @include flex(start, flex-start, column);
+
+          &-company-name {
+            font-size: 14px;
+            padding-bottom: 4px;
+            width: 125px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          &-user-role {
+            font-size: 12px;
+            color: map-get($text, 'disabled');
+          }
+        }
+
+        &-selected {
+          position: absolute;
+          right: 10px;
+          top: 16px;
+          color: map-get($base, 'primary');
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+.header-dropdown-container {
+  display: inline-flex;
+  width: 420px;
+
+  .header-dropdown-left {
+    height: max-content;
+  }
+
+  .header-dropdown-right {
+    height: max-content;
+  }
+}
+
+.change-password-modal {
+  @include flex(center, center, column);
+  width: 100%;
+
+  &-header {
+    @include flex(center, space-between, row);
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  &-form {
+    @extend .change-password-modal;
+    margin-top: 10px;
+
+    width: 100%;
+    gap: 10px;
+  }
+}

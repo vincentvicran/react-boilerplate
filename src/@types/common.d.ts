@@ -132,6 +132,7 @@ declare namespace Com {
       | 'topmiddle'
 
     interface DropdownProps {
+      id: number | string
       children?: React.ReactNode
       trigger: (elementArg: triggerElementArgType) => React.ReactNode
       active?: boolean
@@ -302,6 +303,7 @@ declare namespace Com {
   }
 
   interface ModalContainerProps {
+    id: number | string
     children: React.ReactNode
     visible: boolean
     style?: React.CSSProperties
