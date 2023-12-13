@@ -1,7 +1,9 @@
 import { colors } from 'src/modules'
 import { CustomModal } from '../index'
+import { Button } from '../button'
 
 export const ConfirmationModal = ({
+  id,
   displayElement,
   label,
   onConfirmClick,
@@ -14,7 +16,11 @@ export const ConfirmationModal = ({
   additionalContent,
 }: Com.ConfirmationModalProps) => {
   return (
-    <CustomModal displayElement={displayElement} width="40vw">
+    <CustomModal
+      id={`confirmation-modal-${id}`}
+      displayElement={displayElement}
+      width="40vw"
+    >
       {({ onCloseModalHandler }) => (
         <div>
           <div>
@@ -24,29 +30,24 @@ export const ConfirmationModal = ({
           {/* <ActivityIndicator animating={loading}> */}
           <div
             style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
               width: '100%',
-              float: 'right',
               gap: 10,
             }}
           >
-            <button
+            <Button
+              className="btn-secondary"
               onClick={() => {
                 onCloseModalHandler()
+              }}
+              style={{
+                background: colors.grey100,
               }}
               type="button"
               title={cancelLabel}
             />
-            <button
-              style={{
-                background: !!danger
-                  ? colors.red
-                  : !!success
-                  ? colors.green
-                  : !!black
-                  ? colors.black
-                  : colors.primary200,
-                color: 'white',
-              }}
+            <Button
               type="button"
               onClick={() => {
                 onConfirmClick(onCloseModalHandler)

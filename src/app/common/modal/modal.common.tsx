@@ -91,17 +91,25 @@ export const Modal = ({
             ...modalOverlayStyle,
           }}
           variants={{
-            from: { opacity: 0, scale: 0.8 },
-            enter: { opacity: 1, scale: 1 },
-            leave: { opacity: 0, scale: 0.8 },
+            from: { opacity: 0 },
+            enter: { opacity: 1 },
+            leave: { opacity: 0 },
           }}
-          animate="from"
-          initial="enter"
+          animate="enter"
+          initial="from"
           exit="leave"
         >
           <motion.div
             className="ModalContentStyled"
             ref={modalRef}
+            variants={{
+              from: { scale: 0.8 },
+              enter: { scale: 1 },
+              leave: { scale: 0.8 },
+            }}
+            animate="enter"
+            initial="from"
+            exit="leave"
             style={{
               // scale: motionStyle.scale,
               height: 'auto',

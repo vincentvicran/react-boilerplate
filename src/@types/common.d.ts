@@ -30,15 +30,10 @@ declare namespace Com {
 
   type ButtonColorType = 'default' | 'primary' | 'critical' | 'success'
 
-  interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-    title?: string
-    leftIcon?: React.ReactNode
-    rightIcon?: React.ReactNode
-    className?: string
-    onClick?: (arg: React.MouseEvent<HTMLButtonElement>) => void
-    color?: ButtonColorType
-    textTransform?: 'capitalize' | 'uppercase' | 'lowercase'
-    [x: string]: any
+  interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
+    title: React.ReactNode
+    prepend?: React.ReactNode
+    append?: React.ReactNode
   }
 
   interface SmallButtonProps extends ButtonProps {}
@@ -95,6 +90,7 @@ declare namespace Com {
   }
 
   interface ConfirmationModalProps {
+    id: string | number
     displayElement: React.ReactNode
     label: string
     onConfirmClick: (a?: any) => void
@@ -109,12 +105,14 @@ declare namespace Com {
   }
 
   interface CustomModalProps {
+    id: string | number
     displayElement: React.ReactNode
     children(options: { onCloseModalHandler(): any }): React.ReactNode
     onOutSideClickHandler?: boolean
     modalStyles?: React.CSSProperties
     width?: string | number
     height?: string | number
+    // overflowY: string
     disableScroll?: boolean
   }
 

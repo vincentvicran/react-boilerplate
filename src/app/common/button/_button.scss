@@ -1,0 +1,23 @@
+.btn {
+  padding: 12px 15px;
+  background-color: $buttonPrimary;
+  font-size: map-get($fontSizes, 3);
+  border: none;
+  color: white;
+  border-radius: map-get($radius, default);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all ease 0.3s;
+  &:hover {
+    background-color: $buttonHover;
+  }
+}
+
+.btn-secondary {
+  &:hover {
+    background-color: #222 !important;
+  }
+}
