@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
+import { IoMdSearch } from 'react-icons/io'
 import { Tooltip } from 'src/app/common'
 import { useAuth } from '../hooks'
 import { useCanAccessRoute } from '../routes/ProtectedRoutes.app'
@@ -44,7 +45,7 @@ const SideNavComponent = React.memo(() => {
           )} */}
         </div>
         <motion.div style={{ height: 'auto' }}>
-          {/* <GetNav route={'Sample'} url={'/sample'} icon={<ImSearch />} /> */}
+          <GetNav route={'Sample'} url={'/sample'} icon={<IoMdSearch />} />
         </motion.div>
       </motion.div>
     </div>
@@ -65,32 +66,32 @@ const GetNav = ({
   if (!route) return null
   const props = { opacity: sidenavExpand ? 1 : 0 }
 
-  return (
-    canAccess.length > 0 && (
-      <div className={`sidenav${sidenavExpand ? '' : '-small'}`}>
-        <NavLink
-          to={url}
-          style={({ isActive }) => ({
-            textDecoration: 'none',
-          })}
-          className={({ isActive }) =>
-            isActive
-              ? 'sidenav-title-container active '
-              : 'sidenav-title-container'
-          }
-        >
-          <div className="sidenav-title">
-            <Tooltip title={route}>
-              <div className="sidenav-title-icon">{icon}</div>
-            </Tooltip>
-            {sidenavExpand && (
-              <motion.div className="sidenav-title-text" animate={props}>
-                {route}
-              </motion.div>
-            )}
-          </div>
-        </NavLink>
-      </div>
-    )
+  return canAccess.length > 0 ? (
+    <div className={`sidenav${sidenavExpand ? '' : '-small'}`}>
+      <NavLink
+        to={url}
+        style={({ isActive }) => ({
+          textDecoration: 'none',
+        })}
+        className={({ isActive }) =>
+          isActive
+            ? 'sidenav-title-container active '
+            : 'sidenav-title-container'
+        }
+      >
+        <div className="sidenav-title">
+          <Tooltip title={route}>
+            <div className="sidenav-title-icon">{icon}</div>
+          </Tooltip>
+          {sidenavExpand && (
+            <motion.div className="sidenav-title-text" animate={props}>
+              {route}
+            </motion.div>
+          )}
+        </div>
+      </NavLink>
+    </div>
+  ) : (
+    <></>
   )
 }

@@ -1,5 +1,6 @@
 export * from './chip'
 export * from './collapse'
+export * from './compwrapper'
 export * from './confirmationModal'
 export * from './customModal'
 export * from './dropdown'

@@ -27,7 +27,7 @@ interface ContextProps {
 }
 
 const defaultValue: ContextProps = {
-  auth: { isLoggedin: false, role: '' },
+  auth: { isLoggedin: true, role: 'USER' },
   setAuth: () => {},
   authLoading: true,
   user: undefined,
@@ -41,7 +41,7 @@ export const AuthContext = createContext<ContextProps>(defaultValue)
 
 export const AuthProvider = memo(({ children }: any) => {
   const [auth, setAuth] = useState<AuthProps>({
-    isLoggedin: false,
+    isLoggedin: true,
     role: 'USER',
   })
 
@@ -77,20 +77,20 @@ export const AuthProvider = memo(({ children }: any) => {
     setAuthLoading(false)
   }
 
-  useEffect(() => {
-    setAuthLoading(true)
+  // useEffect(() => {
+  //   setAuthLoading(true)
 
-    const token = getCookie('token')
-    if (token) {
-      handleLogin('ADMIN', token)
-    } else {
-      loginFailure()
-    }
-  }, [])
+  //   const token = getCookie('token')
+  //   if (token) {
+  //     handleLogin('ADMIN', token)
+  //   } else {
+  //     loginFailure()
+  //   }
+  // }, [handleLogin])
 
-  if (authLoading) {
-    return <div>Redirecting...</div>
-  }
+  // if (authLoading) {
+  //   return <div>Redirecting...</div>
+  // }
 
   return (
     <AuthContext.Provider
