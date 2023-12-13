@@ -1,66 +1,56 @@
-import React, {useState, useRef, useLayoutEffect, useEffect} from 'react'
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import useMeasure from 'react-use-measure'
-import {toast} from 'react-hot-toast'
-import {useSpringValue, animated} from '@react-spring/web'
+import { toast } from 'react-hot-toast'
+import { motion } from 'framer-motion'
+import { MdMenu, MdKeyboardArrowDown, MdCheck } from 'react-icons/md'
+
+import { BsThreeDotsVertical } from 'react-icons/bs'
 import {
-  MdMenu,
-  MdKeyboardArrowDown,
-  BsThreeDotsVertical,
-  ImUser,
-  IoCloseCircle,
+  IoIosCloseCircle,
   IoIosArrowForward,
   IoIosArrowBack,
-  MdCheck
-} from 'react-icons/all'
+} from 'react-icons/io'
 
-import {
-  InputField,
-  Button,
-  Box,
-  Modal,
-  Breadcrumb,
-  ToolTip,
-  Dropdown,
-  Menu
-} from 'src/app/common'
-import {useInput} from 'src/hooks'
-import {useAuth} from 'src/app/routing'
-import {isValid, validator} from 'src/utils'
+import { FaUserAlt } from 'react-icons/fa'
+
+// import companyLogo from 'src/assets/icons/logo1.png'
+import { InputField, Dropdown, Menu, Modal } from 'src/app/common'
+import { useInput } from 'src/hooks'
+import { useAuth } from 'src/app/routing'
+import { isValid, validator } from 'src/utils'
 // import {userAuthLogoutAction} from 'src/redux'
-import companyLogo from 'src/assets/icons/logo1.png'
-import {useDispatch} from 'src/store'
-import {changePassword} from 'src/app/pages/login/login.slice'
+import { useDispatch } from 'src/store'
 
 const companyData = [
   {
     id: 1,
     name: 'Codniv Innovations Pvt. Ltd.',
-    img: companyLogo,
-    role: 'Superadmin'
+    img: '',
+    role: 'Superadmin',
   },
   {
     id: 2,
     name: 'PEES Travels Pvt. Ltd.',
-    img: companyLogo,
-    role: 'SD'
+    img: '',
+    role: 'SD',
   },
   {
     id: 3,
     name: 'SEED Pvt. Ltd.',
-    img: companyLogo,
-    role: 'Admin'
-  }
+    img: '',
+    role: 'Admin',
+  },
 ]
 
 export const Header = () => {
   // const dispatch = useDispatch()
   const [visible, setVisible] = useState<boolean>(false)
 
-  const {handleLogout, setSidenavExpand, sidenavExpand} = useAuth()
+  const { handleLogout, setSidenavExpand, sidenavExpand } = useAuth()
   // const {register, handleSubmit, errors, watch} = useForm()
 
   const [companySelected, setCompanySelected] = useState(
-    companyData.filter((_, index) => index === 0)[0]
+    companyData.filter((_, index) => index === 0)[0],
   )
 
   // const newPassword = useRef({})
@@ -68,17 +58,8 @@ export const Header = () => {
 
   const [switchFlag, setSwitchFlag] = useState<boolean>(true)
 
-  const [leftRef, {height: leftHeight}] = useMeasure()
-  const [rightRef, {height: rightHeight}] = useMeasure()
-
-  const translateX = useSpringValue(0)
-  const height = useSpringValue(70)
-
-  useLayoutEffect(() => {
-    // console.log('leftHeight, rightHeight: ', leftHeight, rightHeight)
-    if (leftHeight > 0 && rightHeight > 0)
-      height.start(switchFlag ? leftHeight + 67 : rightHeight + 77)
-  }, [switchFlag])
+  const [leftRef, { height: leftHeight }] = useMeasure()
+  const [rightRef, { height: rightHeight }] = useMeasure()
 
   return (
     <div className="header-container">
@@ -94,23 +75,22 @@ export const Header = () => {
               <MdMenu size={16} />
             )}
           </div>
-          <div className="header-breadcrumb">
-            <Breadcrumb />
-          </div>
+          <div className="header-breadcrumb">Breadcrum</div>
         </div>
 
         <div className="header-right">
           <div className="logged-user">
             <Dropdown
+              id="header-dropdown"
               triggerToggle
               style={{
-                top: 40
+                top: 40,
               }}
               placement="bottomright"
               trigger={() => (
                 <div className="logged-user-container">
                   <span className="logged-user-icon">
-                    <ImUser size={14} />
+                    <FaUserAlt size={14} />
                   </span>
 
                   <span className="logged-user-name">
@@ -125,9 +105,9 @@ export const Header = () => {
                 </div>
               )}
             >
-              <Menu.Container style={{width: 210, overflow: 'hidden'}}>
-                <animated.div
-                  style={{translateX, height}}
+              <Menu.Container style={{ width: 210, overflow: 'hidden' }}>
+                <motion.div
+                  animate={{ x: 70 }}
                   className="header-dropdown-container"
                 >
                   <div className="header-dropdown-left" ref={leftRef}>
@@ -235,10 +215,10 @@ export const Header = () => {
                       )
                     })}
                   </div> */}
-                </animated.div>
+                </motion.div>
               </Menu.Container>
             </Dropdown>
-            <ChangePasswordModal {...{visible, setVisible}} />
+            <ChangePasswordModal {...{ visible, setVisible }} />
           </div>
         </div>
       </div>
@@ -248,17 +228,17 @@ export const Header = () => {
 
 const ChangePasswordModal = ({
   visible,
-  setVisible
+  setVisible,
 }: {
   visible: boolean
   setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
-  const {data, onChangeHandler, onClear} = useInput({
+  const { data, onChangeHandler, onClear } = useInput({
     oldPassword: '',
     newPassword: '',
-    confirmPassword: ''
+    confirmPassword: '',
   })
-  const {handleLogout} = useAuth()
+  const { handleLogout } = useAuth()
 
   // const {passwordLoader} = useSelector((state: any) => state.login)
   // const {user} = useSelector((state) => state.user)
@@ -274,7 +254,7 @@ const ChangePasswordModal = ({
     const catchedErros = {}
     const validate = validator(catchedErros)
 
-    const {oldPassword, newPassword, confirmPassword} = data
+    const { oldPassword, newPassword, confirmPassword } = data
 
     validate('oldPassword', oldPassword.length === 0, () => {
       toast.error("Phone can't be empty!")
@@ -302,16 +282,6 @@ const ChangePasswordModal = ({
       String(data.newPassword) === String(data.confirmPassword) &&
       data.newPassword.length >= 6
     ) {
-      dispatch(
-        changePassword({
-          oldPass: data.oldPassword,
-          newPass: data.newPassword,
-          onSuccess: () => {
-            toast.success('Successfully changed password')
-            handleLogout()
-          }
-        })
-      )
       handleModalClose()
     } else if (data.newPassword.length < 6) {
       toast.error('Password must be atleaset 6 characters')
@@ -321,13 +291,13 @@ const ChangePasswordModal = ({
   }
 
   return (
-    <Modal visible={visible} width={360}>
+    <Modal id={'header-modal'} visible={visible} width={360}>
       <div className="change-password-modal">
         <div className="change-password-modal-header">
           <div>
             <h3>Change Password</h3>
           </div>
-          <IoCloseCircle size={24} color="red" onClick={handleModalClose} />
+          <IoIosCloseCircle size={24} color="red" onClick={handleModalClose} />
         </div>
         <form onSubmit={onSubmit} className="change-password-modal-form">
           <InputField
@@ -363,12 +333,16 @@ const ChangePasswordModal = ({
           {/* {errors.confirmPassword && (
                   <p>{errors.confirmPassword.message}</p>
                 )} */}
-          <Box flexBox jEnd mb={20} mt={20} style={{width: '100%'}}>
+          <div style={{ width: '100%' }}>
             {/* <ActivityIndicator animating={passwordLoader}> */}
-            <Button title="Submit" color="primary" />
+            <button title="Submit" color="primary">
+              Submit
+            </button>
             {/* </ActivityIndicator> */}
-            <Button title="Cancel" type="button" onClick={handleModalClose} />
-          </Box>
+            <button title="Cancel" type="button" onClick={handleModalClose}>
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </Modal>

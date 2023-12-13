@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
-
 export const Login = () => {
   return (
     <div className="login-page">
@@ -15,7 +14,6 @@ export const Login = () => {
             `}
         </script>
       </Helmet>
-
       <Link to="/table">
         <div className="login-nav">Go to Table Page</div>
       </Link>

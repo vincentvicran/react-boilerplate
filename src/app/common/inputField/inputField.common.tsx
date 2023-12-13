@@ -1,11 +1,9 @@
-import { Inter } from "next/font/google";
-import React, { useState } from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { BiSearch } from "react-icons/bi";
+import React, { useState } from 'react'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import { BiSearch } from 'react-icons/bi'
 
 // import { Box, Label, Text } from "src/app/common";
-import { colors } from "src/modules";
-const inter = Inter({ subsets: ["latin"] });
+import { colors } from 'src/modules'
 
 export const InputField = (props: Com.InputFieldProps) => {
   const {
@@ -29,8 +27,8 @@ export const InputField = (props: Com.InputFieldProps) => {
     inputMode,
     append,
     ...rest
-  } = props;
-  const [typepassWord, setTypepassWord] = useState("password");
+  } = props
+  const [typepassWord, setTypepassWord] = useState('password')
 
   return (
     <div className="input-field-container" style={containerStyle}>
@@ -40,110 +38,99 @@ export const InputField = (props: Com.InputFieldProps) => {
         // onChange={onChange}
         onChange={(e) => {
           if (/^\s/.test(e?.target?.value)) {
-            e.preventDefault();
-            return;
+            e.preventDefault()
+            return
           }
 
-          if (inputType === "nonZero") {
+          if (inputType === 'nonZero') {
             if (/^[1-9]*$|^[1-9][0-9]*$/.test(e?.target?.value)) {
-              e.preventDefault();
-              onChange(e);
-              return;
+              e.preventDefault()
+              onChange(e)
+              return
             }
-            return;
+            return
           }
-          if (inputType === "citizen") {
+          if (inputType === 'citizen') {
             if (/^[(0-9a-z-/,)]*$/i.test(e?.target?.value)) {
-              e.preventDefault();
-              onChange(e);
-              return;
+              e.preventDefault()
+              onChange(e)
+              return
             }
-            return;
+            return
           }
 
-          if (inputType === "organization") {
-            if (
-              /^[A-Z]?([a-zA-Z0-9]*|[-@\.#&!\s]?)+$/i.test(e?.target?.value)
-            ) {
-              e.preventDefault();
-              onChange(e);
-              return;
-            }
-            return;
-          }
-
-          if (inputType === "numSymbol") {
+          if (inputType === 'numSymbol') {
             if (/^[(0-9a-z-/)]*$/i.test(e?.target?.value)) {
-              e.preventDefault();
-              onChange(e);
-              return;
+              e.preventDefault()
+              onChange(e)
+              return
             }
-            return;
+            return
           }
-          if (inputType === "alphanumeric") {
+          if (inputType === 'alphanumeric') {
             if (/^[0-9A-Za-z]*$/.test(e?.target?.value)) {
-              e.preventDefault();
-              onChange(e);
-              return;
+              e.preventDefault()
+              onChange(e)
+              return
             }
-            return;
+            return
           }
 
-          if (inputType === "tel") {
+          if (inputType === 'tel') {
             if (/^[0-9]*$/.test(e?.target?.value)) {
-              e.preventDefault();
-              onChange(e);
-              return;
+              e.preventDefault()
+              onChange(e)
+              return
             }
-            return;
+            return
           }
 
-          if (inputType === "number" || type === "number") {
+          if (inputType === 'number' || type === 'number') {
             if (/^(\d*)$/i.test(e?.target?.value)) {
-              e.preventDefault();
-              onChange(e);
-              return;
+              e.preventDefault()
+              onChange(e)
+              return
             }
-            return;
+            return
           }
 
-          if (inputType === "decimal") {
+          if (inputType === 'decimal') {
             if (/^(\d*)[.,](\d+)$/i.test(e?.target?.value)) {
-              e.preventDefault();
-              onChange(e);
-              return;
+              e.preventDefault()
+              onChange(e)
+              return
             }
-            return;
+            return
           }
 
-          if (inputType === "fraction") {
+          if (inputType === 'fraction') {
             if (/^(\d+)[\/](\d+)$/i.test(e?.target?.value)) {
-              e.preventDefault();
-              onChange(e);
-              return;
+              e.preventDefault()
+              onChange(e)
+              return
             }
-            return;
+            return
           }
 
-          onChange(e);
+          onChange(e)
         }}
-        style={{ ...style, borderColor: !!error ? "red" : "" }}
+        style={{ ...style, borderColor: !!error ? 'red' : '' }}
         className={`inputfield body ${className} ${disabled && `disabled`} ${
-          type === "password" && "password"
-        } ${inputType === "nepali" && "nepali"}`}
+          type === 'password' && 'password'
+        } `}
         placeholder={placeholder}
         type={
-          type === "password" ? typepassWord : type === "number" ? "text" : type
+          type === 'password' ? typepassWord : type === 'number' ? 'text' : type
         }
         onInput={(e: any) => {
-          if (type === "number") {
+          if (type === 'number') {
             if (max) {
               if (e.target.value.length > max) {
-                e.target.value = e.target.value.slice(0, max);
+                e.target.value = e.target.value.slice(0, max)
               }
             }
             if (e.target.value < 0) {
-              e.target.value = 0;
+              e.target.value = 0
             }
 
             // return e.target.value
@@ -154,21 +141,21 @@ export const InputField = (props: Com.InputFieldProps) => {
         disabled={disabled}
         autoFocus={autofocus}
         readOnly={readonly}
-        inputMode={inputMode ?? type === "number" ? "numeric" : inputMode}
+        inputMode={inputMode ?? type === 'number' ? 'numeric' : inputMode}
         // value={value}
         {...rest}
       />
       {append}
-      {type === "password" && (
+      {type === 'password' && (
         <div
           className="password-icon"
           onClick={() =>
             setTypepassWord((prev) =>
-              prev === "password" ? "text" : "password"
+              prev === 'password' ? 'text' : 'password',
             )
           }
         >
-          {typepassWord === "password" ? (
+          {typepassWord === 'password' ? (
             <AiOutlineEye />
           ) : (
             <AiOutlineEyeInvisible />
@@ -178,24 +165,22 @@ export const InputField = (props: Com.InputFieldProps) => {
 
       {!!error && <div className="input-error">{error}</div>}
     </div>
-  );
-};
+  )
+}
 
 export const TextArea = (props: Com.TextAreaProps) => {
-  const { className, disabled, cols = 40, rows = 5, ...rest } = props;
+  const { className, disabled, cols = 40, rows = 5, ...rest } = props
   return (
     <textarea
       cols={cols}
       rows={rows}
-      className={`${inter.className} textarea ${className} ${
-        disabled && `disabled`
-      }`}
+      className={` textarea ${className} ${disabled && `disabled`}`}
       disabled={disabled}
       // style={{ fontFamily: "inherit !important" }}
       {...rest}
     />
-  );
-};
+  )
+}
 
 export const FormInput = ({
   children,
@@ -213,23 +198,23 @@ export const FormInput = ({
       <div>
         <label
           htmlFor={id}
-          style={{ fontSize: 16, fontFamily: "SFPT-Medium" }}
+          style={{ fontSize: 16, fontFamily: 'SFPT-Medium' }}
           className={textClassName}
         >
-          {label} {required && <span style={{ color: "red" }}>*</span>}
+          {label} {required && <span style={{ color: 'red' }}>*</span>}
         </label>
-        <span style={{ fontSize: "14px", color: colors.text.secondary }}>
+        <span style={{ fontSize: '14px', color: colors.text.secondary }}>
           {newElement}
         </span>
       </div>
 
       {children}
     </div>
-  );
-};
+  )
+}
 
 export const SearchField = (props: Com.SearchInputProps) => {
-  const { onSearch, ...rest } = props;
+  const { onSearch, ...rest } = props
   return (
     <InputField
       {...rest}
@@ -239,5 +224,5 @@ export const SearchField = (props: Com.SearchInputProps) => {
         </div>
       }
     />
-  );
-};
+  )
+}

@@ -234,7 +234,6 @@ declare namespace Com {
   interface SearchInputProps extends InputFieldProps {
     onSearch?: () => void
   }
-
   interface LineItemTableColumns<T, K extends Extract<keyof T, string>> {
     field: K
     name: string

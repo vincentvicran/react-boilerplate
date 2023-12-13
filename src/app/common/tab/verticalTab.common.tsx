@@ -1,10 +1,11 @@
-import {useState, useImperativeHandle, forwardRef, useEffect} from 'react'
-import * as Icon from 'react-icons/all'
+import { useState, useImperativeHandle, forwardRef, useEffect } from 'react'
+import { FaChild } from 'react-icons/fa'
+import { RiBankFill } from 'react-icons/ri'
 
-import {colors} from 'src/modules'
+import { colors } from 'src/modules'
 
 export const VerticalTab = forwardRef(
-  ({panes, onTabChange, activeUserProp}: Com.VerticalTabProps, ref) => {
+  ({ panes, onTabChange, activeUserProp }: Com.VerticalTabProps, ref) => {
     const [activeIndex, setActiveIndex] = useState<number>(0)
     const [activeTab, setActiveTab] = useState<Com.VerticalPanesProps | null>(
       null,
@@ -33,7 +34,7 @@ export const VerticalTab = forwardRef(
       <div className="vertical-tab">
         <div className="vertical-tab-titles">
           {panes.map(
-            ({title, onClick, isFinanced, isMinor, style}, index: number) => {
+            ({ title, onClick, isFinanced, isMinor, style }, index: number) => {
               return (
                 <div
                   key={index}
@@ -55,7 +56,7 @@ export const VerticalTab = forwardRef(
                 >
                   {title}
                   {!!isFinanced && (
-                    <Icon.RiBankFill
+                    <RiBankFill
                       style={{
                         marginLeft: 5,
                         position: 'absolute',
@@ -65,7 +66,7 @@ export const VerticalTab = forwardRef(
                     />
                   )}
                   {!!isMinor && (
-                    <Icon.FaChild
+                    <FaChild
                       style={{
                         marginLeft: 5,
                         position: 'absolute',
