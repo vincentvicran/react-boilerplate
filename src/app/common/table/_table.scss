@@ -1,0 +1,53 @@
+$table-primary-bg: #f0f0f0;
+.data-table {
+  width: 100%;
+  background-color: $table-primary-bg;
+
+  &--stripped {
+    tbody {
+      tr:nth-child(even) {
+        background-color: $table-primary-bg;
+      }
+
+      tr:nth-child(odd) {
+        background-color: white;
+      }
+    }
+  }
+
+  tr {
+    th,
+    td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      cursor: pointer;
+    }
+
+    td {
+    }
+  }
+
+  tbody {
+    color: gray;
+    .action-button {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s, background-color 0.2s;
+    }
+  }
+  thead {
+    border-bottom: 2px solid gainsboro;
+  }
+}
+
+.table-pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 10px;
+}

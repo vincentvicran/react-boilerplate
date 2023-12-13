@@ -5,10 +5,10 @@ import {
   Dispatch,
   useEffect,
   memo,
-  useCallback
+  useCallback,
 } from 'react'
 
-import {getCookie, removeCookie, setCookie} from '../../../helpers'
+import { getCookie, removeCookie, setCookie } from '../../../helpers'
 
 type AuthProps = {
   isLoggedin: boolean
@@ -27,28 +27,27 @@ interface ContextProps {
 }
 
 const defaultValue: ContextProps = {
-  auth: {isLoggedin: false, role: ''},
+  auth: { isLoggedin: false, role: '' },
   setAuth: () => {},
   authLoading: true,
   user: undefined,
   sidenavExpand: true,
   setSidenavExpand: () => {},
   handleLogin: () => {},
-  handleLogout: () => {}
+  handleLogout: () => {},
 }
 
 export const AuthContext = createContext<ContextProps>(defaultValue)
 
-export const AuthProvider = memo(({children}: any) => {
+export const AuthProvider = memo(({ children }: any) => {
   const [auth, setAuth] = useState<AuthProps>({
     isLoggedin: false,
-    role: 'USER'
+    role: 'USER',
   })
 
   const [sidenavExpand, setSidenavExpand] = useState<boolean>(true)
   const [authLoading, setAuthLoading] = useState(true)
   const [user, setUser] = useState<any>()
-  console.log(auth, authLoading)
 
   const handleLogin = useCallback((role?: string, user?: any) => {
     user && setUser(user)
@@ -65,7 +64,7 @@ export const AuthProvider = memo(({children}: any) => {
   const loginSuccess = (role: string) => {
     setAuth({
       isLoggedin: true,
-      role
+      role,
     })
     setAuthLoading(false)
   }
@@ -73,7 +72,7 @@ export const AuthProvider = memo(({children}: any) => {
   const loginFailure = () => {
     setAuth({
       isLoggedin: false,
-      role: 'USER'
+      role: 'USER',
     })
     setAuthLoading(false)
   }
@@ -103,7 +102,7 @@ export const AuthProvider = memo(({children}: any) => {
         sidenavExpand,
         setSidenavExpand,
         handleLogin,
-        handleLogout
+        handleLogout,
       }}
     >
       {children}
