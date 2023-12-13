@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { Tooltip } from 'src/app/common'
 import { useAuth } from '../hooks'
 import { useCanAccessRoute } from '../routes/ProtectedRoutes.app'
-// import {useMeasure} from 'src/hooks'
 
 export const SideNav = React.memo(() => {
   const { auth } = useAuth()
@@ -15,57 +14,21 @@ export const SideNav = React.memo(() => {
 const SideNavComponent = React.memo(() => {
   const { auth, sidenavExpand } = useAuth()
 
-  // const [sideNavHeight, setSideNavHeight] = useState<number>(0)
-  // const [headerHeight, setHeaderHeight] = useState<number>(0)
-
   const props = { width: sidenavExpand ? 280 : 90 }
 
   const headerStyle = { width: sidenavExpand ? 60 : 80 }
 
-  // const transitions = useTransition(sidenavExpand, {
-  //   from: {opacity: 0},
-  //   enter: {opacity: 1},
-  //   leave: {opacity: 0},
-  //   config: {
-  //     duration: 200
-  //   }
-  // })
-
-  // const onToggleSidenav = () => {
-  //   setSidenavExpand((prev) => !prev)
-  // }
-
-  // const sideNavBind = useMeasure(({height}: any) => {
-  //   setSideNavHeight(height)
-  // })
-
-  // const headerBind = useMeasure(({height}: any) => {
-  //   setHeaderHeight(height)
-  // })
-
   return auth.isLoggedin ? (
-    <div
-      className="sidenav-container"
-      //  {...sideNavBind()}
-    >
+    <div className="sidenav-container">
       <motion.div
         style={{
           height: '100%',
-          ...props,
         }}
+        animate={props}
       >
-        <div
-          className="sidenav-header"
-          // {...headerBind()}
-        >
-          <motion.div
-            className="sidenav-header-logo1"
-            style={{
-              ...headerStyle,
-            }}
-          >
+        <div className="sidenav-header">
+          <motion.div className="sidenav-header-logo1" animate={headerStyle}>
             <img src={'/assets/images/header-logo.svg'} alt="TMO" />
-            {/* <img src={Logo1} alt="Logo1" /> */}
           </motion.div>
           {/* {transitions(
             (animationStyle, item) =>
@@ -81,16 +44,22 @@ const SideNavComponent = React.memo(() => {
           )} */}
         </div>
         <motion.div style={{ height: 'auto' }}>
-          {/* {getNav('Sample', '/sample', () => (
-            <ImSearch />
-          ))} */}
+          {/* <GetNav route={'Sample'} url={'/sample'} icon={<ImSearch />} /> */}
         </motion.div>
       </motion.div>
     </div>
   ) : null
 })
 
-const GetNav = (route: string, url: string, icon: () => React.ReactNode) => {
+const GetNav = ({
+  route,
+  url,
+  icon,
+}: {
+  route: string
+  url: string
+  icon: React.ReactNode
+}) => {
   const canAccess = useCanAccessRoute(url)
   const { sidenavExpand } = useAuth()
   if (!route) return null
@@ -112,18 +81,10 @@ const GetNav = (route: string, url: string, icon: () => React.ReactNode) => {
         >
           <div className="sidenav-title">
             <Tooltip title={route}>
-              <div className="sidenav-title-icon">
-                {/* <ImSearch /> */}
-                {icon()}
-              </div>
+              <div className="sidenav-title-icon">{icon}</div>
             </Tooltip>
             {sidenavExpand && (
-              <motion.div
-                className="sidenav-title-text"
-                style={{
-                  ...props,
-                }}
-              >
+              <motion.div className="sidenav-title-text" animate={props}>
                 {route}
               </motion.div>
             )}

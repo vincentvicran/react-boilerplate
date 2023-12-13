@@ -9,7 +9,7 @@ import ImageUploader from 'quill-image-uploader'
 
 import 'react-quill/dist/quill.snow.css'
 import { api } from 'src/api'
-import { getAboutUsImageURL } from 'src/helpers/getImageUrl.helper'
+// import { getAboutUsImageURL } from 'src/helpers/getImageUrl.helper'
 // import {api} from 'src/api'
 
 // const ImageBase = Quill.import('formats/image')
@@ -124,7 +124,7 @@ const EditorModules = {
             undefined,
             image,
           )
-          return getAboutUsImageURL(response.data.data.data.at(0))
+          // return getAboutUsImageURL(response.data.data.data.at(0))
         }
         const imageUrl = imgUrl()
         resolve(imageUrl)

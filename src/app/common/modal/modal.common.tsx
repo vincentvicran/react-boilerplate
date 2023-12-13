@@ -82,35 +82,37 @@ export const Modal = ({
 
   return (
     <AnimatePresence initial={false}>
-      <motion.div
-        key={id}
-        className="ContainerStyled"
-        style={{
-          ...modalContainerStyle,
-          ...modalOverlayStyle,
-        }}
-        variants={{
-          from: { opacity: 0, backgroundColor: 'red', scale: 0.8 },
-          enter: { opacity: 1, backgroundColor: 'red', scale: 1 },
-          leave: { opacity: 0, backgroundColor: 'red', scale: 0.8 },
-        }}
-        animate="from"
-        initial="enter"
-        exit="leave"
-      >
+      {visible && (
         <motion.div
-          className="ModalContentStyled"
-          ref={modalRef}
+          key={id}
+          className="ContainerStyled"
           style={{
-            // scale: motionStyle.scale,
-            height: 'auto',
-            ...size,
-            ...style,
+            ...modalContainerStyle,
+            ...modalOverlayStyle,
           }}
+          variants={{
+            from: { opacity: 0, scale: 0.8 },
+            enter: { opacity: 1, scale: 1 },
+            leave: { opacity: 0, scale: 0.8 },
+          }}
+          animate="from"
+          initial="enter"
+          exit="leave"
         >
-          {children}
+          <motion.div
+            className="ModalContentStyled"
+            ref={modalRef}
+            style={{
+              // scale: motionStyle.scale,
+              height: 'auto',
+              ...size,
+              ...style,
+            }}
+          >
+            {children}
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
     </AnimatePresence>
   )
 }
