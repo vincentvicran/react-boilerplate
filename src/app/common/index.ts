@@ -11,8 +11,5 @@ export * from './reactPortal'
 export * from './skeleton'
 export * from './tab'
 export * from './table'
-<<<<<<< Updated upstream
-=======
 export * from './textEditor'
->>>>>>> Stashed changes
 export * from './tooltip'

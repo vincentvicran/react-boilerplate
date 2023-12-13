@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
+import { Tooltip } from 'src/app/common'
 import { useAuth } from '../hooks'
 import { useCanAccessRoute } from '../routes/ProtectedRoutes.app'
 // import {useMeasure} from 'src/hooks'
@@ -110,12 +111,12 @@ const GetNav = (route: string, url: string, icon: () => React.ReactNode) => {
           }
         >
           <div className="sidenav-title">
-            <ToolTip text={route}>
+            <Tooltip title={route}>
               <div className="sidenav-title-icon">
                 {/* <ImSearch /> */}
                 {icon()}
               </div>
-            </ToolTip>
+            </Tooltip>
             {sidenavExpand && (
               <motion.div
                 className="sidenav-title-text"
