@@ -1,5 +1,5 @@
 import { colors } from 'src/modules'
-import { CustomModal } from '../index'
+import { CustomModal, Loader } from '../index'
 import { Button } from '../button'
 
 export const ConfirmationModal = ({
@@ -10,9 +10,6 @@ export const ConfirmationModal = ({
   confirmLabel = 'Delete',
   cancelLabel = 'Cancel',
   loading = false,
-  danger,
-  success,
-  black,
   additionalContent,
 }: Com.ConfirmationModalProps) => {
   return (
@@ -48,6 +45,7 @@ export const ConfirmationModal = ({
               title={cancelLabel}
             />
             <Button
+              prepend={loading && <Loader variant="three" color="white" />}
               type="button"
               onClick={() => {
                 onConfirmClick(onCloseModalHandler)
