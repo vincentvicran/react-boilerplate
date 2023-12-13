@@ -190,10 +190,20 @@ declare namespace Com {
     defaultValue?: string | number | null
     placeholder: string
     style?: React.CSSProperties
-    onChange: React.FormEventHandler<HTMLInputElement>
+    onChange: React.ChangeEventHandler<HTMLInputElement>
     className?: string
     type?: string
-    inputType?: 'alphanumeric' | 'nonZero' | 'citizen' | 'numSymbol' | 'tel'
+    inputType?:
+      | 'alphanumeric'
+      | 'nonZero'
+      | 'citizen'
+      | 'numSymbol'
+      | 'tel'
+      | 'nepali'
+      | 'organization'
+      | 'number'
+      | 'decimal'
+      | 'fraction'
     disabled?: boolean
     error?: any
     lefticon?: React.ReactNode
@@ -206,20 +216,23 @@ declare namespace Com {
     dateMin?: number | string
     readonly?: boolean
     containerStyle?: React.CSSProperties
+    append?: React.ReactNode
   }
 
   interface TextAreaProps extends React.ComponentPropsWithoutRef<'textarea'> {}
 
-  interface FormInputProps {
+  interface FormInputProps extends React.ComponentPropsWithoutRef<'div'> {
     children: React.ReactNode
-    label: string
+    label: string | React.ReactNode
     newElement?: React.ReactNode
     required?: boolean
     style?: React.CSSProperties
+    textClassName?: string
+    textStyle?: React.CSSProperties
   }
 
-  interface SearchInputProps extends React.ComponentPropsWithoutRef<'input'> {
-    containerStyle?: React.CSSProperties
+  interface SearchInputProps extends InputFieldProps {
+    onSearch?: () => void
   }
 
   interface LineItemTableColumns<T, K extends Extract<keyof T, string>> {
