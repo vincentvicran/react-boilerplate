@@ -3,7 +3,7 @@
   left: 0;
   top: 0;
   height: 100%;
-  background-color: #f6f6f6;
+  background-color: $backgroundColor;
   z-index: 10;
   overflow-y: auto;
 }
@@ -12,22 +12,21 @@
   user-select: none;
 
   &-header {
-    width: 100%;
     // height: 240px;
-    padding: 30px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid $grey200;
+    margin-bottom: 20px;
 
     &-logo1 {
-      width: 100px;
-      border: 1px solid red;
+      aspect-ratio: 2.13;
 
       img {
-        border: 1px solid red;
-        width: 100%;
+        aspect-ratio: 2.13;
+
+        width: 100px;
       }
     }
 
@@ -70,9 +69,9 @@
       &-icon {
         position: relative;
         top: 2px;
-        display: inline-block;
-        width: map-get($fontSizes, 7);
-        font-size: 14px;
+        @include flex;
+        width: map-get($fontSizes, 8);
+        font-size: map-get($fontSizes, 5);
         padding-right: 12px;
         margin-bottom: 4px;
       }
@@ -88,44 +87,6 @@
       .sidenav-title {
         border-radius: map-get($radius, 'default');
         color: map-get($base, 'primary');
-      }
-    }
-  }
-
-  &-small {
-    padding: 0;
-    height: 40px;
-    width: 100%;
-    @include flex(center, center, column);
-
-    .sidenav-title-container {
-      @include flex(center, center, row);
-      padding: 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.4s;
-      color: map-get($text, 'primary');
-
-      &:hover {
-        background-color: rgba($grey200, 20%);
-      }
-
-      .sidenav-title {
-        @include flex(center, center, row);
-        padding-left: 10px;
-
-        &-icon {
-          display: inline-block;
-          width: map-get($fontSizes, 7);
-          font-size: 14px;
-        }
-      }
-      &.active {
-        background-color: rgba(map-get($base, 'primary'), 0.1);
-        .sidenav-title {
-          border-radius: map-get($radius, 'default');
-          color: map-get($base, 'primary');
-        }
       }
     }
   }

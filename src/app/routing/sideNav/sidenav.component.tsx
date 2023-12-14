@@ -17,7 +17,10 @@ const SideNavComponent = React.memo(() => {
 
   const props = { width: sidenavExpand ? 280 : 90 }
 
-  const headerStyle = { width: sidenavExpand ? 60 : 80 }
+  const headerStyle = {
+    width: sidenavExpand ? 100 : 90,
+    scale: sidenavExpand ? 1 : 0.7,
+  }
 
   return auth.isLoggedin ? (
     <div className="sidenav-container">
@@ -27,9 +30,17 @@ const SideNavComponent = React.memo(() => {
         }}
         animate={props}
       >
-        <div className="sidenav-header">
+        <motion.div
+          className="sidenav-header"
+          animate={{
+            padding: sidenavExpand ? '16px 20px' : '16px 0',
+          }}
+        >
           <motion.div className="sidenav-header-logo1" animate={headerStyle}>
-            <img src={'/assets/images/header-logo.svg'} alt="TMO" />
+            <img
+              src={'/assets/images/header-logo.png'}
+              alt="PlexBit InfoSystems Logo"
+            />
           </motion.div>
           {/* {transitions(
             (animationStyle, item) =>
@@ -43,7 +54,7 @@ const SideNavComponent = React.memo(() => {
                 </motion.div>
               )
           )} */}
-        </div>
+        </motion.div>
         <motion.div style={{ height: 'auto' }}>
           <GetNav route={'Sample'} url={'/sample'} icon={<IoMdSearch />} />
         </motion.div>
@@ -67,7 +78,7 @@ const GetNav = ({
   const props = { opacity: sidenavExpand ? 1 : 0 }
 
   return canAccess.length > 0 ? (
-    <div className={`sidenav${sidenavExpand ? '' : '-small'}`}>
+    <motion.div className="sidenav">
       <NavLink
         to={url}
         style={({ isActive }) => ({
@@ -90,7 +101,7 @@ const GetNav = ({
           )}
         </div>
       </NavLink>
-    </div>
+    </motion.div>
   ) : (
     <></>
   )

@@ -1,60 +1,60 @@
 $base: (
-  "surface": #19191b,
-  "primary": #ff4457,
-  "secondary": #282828,
-  "success": #4e9f4c,
-  "critical": #cd5353,
-  "warning": #f8b046,
-  "black": #111213,
+  'surface': #19191b,
+  'primary': #9953a8,
+  'secondary': #282828,
+  'success': #4e9f4c,
+  'critical': #cd5353,
+  'warning': #f8b046,
+  'black': #111213,
 );
 
 $text: (
-  "primary": #a362b1,
-  "primaryLight": #9953a8,
-  "secondary": #8b8b8b,
-  "title": #353535,
-  "desc": #7a7a7a,
-  "disabled": #8c9196,
-  "inverted": #ffffff,
-  "base": #ea8969,
+  'primary': #a362b1,
+  'primaryLight': #9953a8,
+  'secondary': #8b8b8b,
+  'title': #353535,
+  'desc': #7a7a7a,
+  'disabled': #8c9196,
+  'inverted': #ffffff,
+  'base': #ea8969,
 );
 
 $surface: (
-  "primary": #e4e5e7,
-  "highlight": #a4e8f2,
-  "success": #aee9d1,
-  "warning": #ffd79d,
-  "attention": #ffea8a,
-  "critical": #fed3d1,
+  'primary': #faeffd,
+  'highlight': #a4e8f2,
+  'success': #aee9d1,
+  'warning': #ffd79d,
+  'attention': #ffea8a,
+  'critical': #fed3d1,
 );
 
 $border: (
-  "primary": #383838,
-  "secondary": #4f4f4f,
-  "lowlight": #dbdbdb,
-  "light": #e6e6e7,
+  'primary': #383838,
+  'secondary': #4f4f4f,
+  'lowlight': #dbdbdb,
+  'light': #e6e6e7,
 );
 
 $action: (
-  "primary": (
-    "default": #2c6ecb,
-    "hovered": #1f5199,
-    "pressed": #113e7e,
+  'primary': (
+    'default': #9852a7,
+    'hovered': #803d8f,
+    'pressed': #113e7e,
   ),
-  "critical": (
-    "default": #d82c0d,
-    "hovered": #bc2200,
-    "pressed": #a21b00,
+  'critical': (
+    'default': #d82c0d,
+    'hovered': #bc2200,
+    'pressed': #a21b00,
   ),
-  "success": (
-    "default": #00b286,
-    "hovered": #189576,
-    "pressed": #0f765c,
+  'success': (
+    'default': #00b286,
+    'hovered': #189576,
+    'pressed': #0f765c,
   ),
-  "inverted": (
-    "default": #ffffff,
-    "hovered": #f5f5f5,
-    "pressed": #e7e7e7,
+  'inverted': (
+    'default': #ffffff,
+    'hovered': #f5f5f5,
+    'pressed': #e7e7e7,
   ),
 );
 
