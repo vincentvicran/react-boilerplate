@@ -54,12 +54,12 @@ export const Dropdown = ({
     } else {
       openDropdown()
     }
-  }, [dropdownActive])
+  }, [dropdownActive, openDropdown])
 
   // Handle outside click on container
-  useOutsideClick(containerRef, () => {
-    outDismiss && closeDropdown()
-  })
+  // useOutsideClick(containerRef, () => {
+  //   outDismiss && closeDropdown()
+  // })
 
   const containerStyles: React.CSSProperties = {
     position: 'relative',
@@ -125,8 +125,10 @@ export const Dropdown = ({
           active: dropdownActive,
         })}
       </span>
-
-      <AnimatePresence initial={false}>
+      <AnimatePresence
+        initial={false}
+        custom={{ minScale, translateX, dropdownActive }}
+      >
         <motion.div
           key={id}
           onClick={() => (inDismiss ? closeDropdown() : false)}
@@ -134,45 +136,12 @@ export const Dropdown = ({
             ...dropdownMenuStyles,
             position: 'absolute',
           }}
-          variants={{
-            from: ({
-              minScale,
-              translateX,
-            }: {
-              minScale: number
-              translateX: number
-            }) => ({
-              opacity: 0,
-              scale: minScale,
-              x: `${translateX}%`,
-            }),
-            enter: ({
-              minScale,
-              translateX,
-            }: {
-              minScale: number
-              translateX: number
-            }) => ({
-              opacity: 0,
-              scale: minScale,
-              x: `${translateX}%`,
-            }),
-            leave: ({
-              minScale,
-              translateX,
-            }: {
-              minScale: number
-              translateX: number
-            }) => ({
-              opacity: 0,
-              scale: minScale,
-              x: `${translateX}%`,
-            }),
+          animate={{
+            opacity: dropdownActive ? 1 : 0,
+            scale: dropdownActive ? minScale : 0,
+            // x: dropdownActive ? `${translateX}%` : 0,
           }}
-          animate="from"
-          initial="enter"
-          exit="leave"
-          custom={{ minScale, translateX }}
+          custom={{ minScale, translateX, dropdownActive }}
         >
           {children}
         </motion.div>

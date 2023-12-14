@@ -1,8 +1,7 @@
-import React, { useState, useRef, useLayoutEffect, useEffect } from 'react'
-import useMeasure from 'react-use-measure'
+import React, { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { motion } from 'framer-motion'
-import { MdMenu, MdKeyboardArrowDown, MdCheck } from 'react-icons/md'
+import { MdMenu, MdKeyboardArrowDown } from 'react-icons/md'
 
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import {
@@ -20,46 +19,13 @@ import { useAuth } from 'src/app/routing'
 import { isValid, validator } from 'src/utils'
 // import {userAuthLogoutAction} from 'src/redux'
 import { useDispatch } from 'src/store'
-
-const companyData = [
-  {
-    id: 1,
-    name: 'Codniv Innovations Pvt. Ltd.',
-    img: '',
-    role: 'Superadmin',
-  },
-  {
-    id: 2,
-    name: 'PEES Travels Pvt. Ltd.',
-    img: '',
-    role: 'SD',
-  },
-  {
-    id: 3,
-    name: 'SEED Pvt. Ltd.',
-    img: '',
-    role: 'Admin',
-  },
-]
+import { Button } from '../button'
 
 export const Header = () => {
   // const dispatch = useDispatch()
   const [visible, setVisible] = useState<boolean>(false)
 
   const { handleLogout, setSidenavExpand, sidenavExpand } = useAuth()
-  // const {register, handleSubmit, errors, watch} = useForm()
-
-  const [companySelected, setCompanySelected] = useState(
-    companyData.filter((_, index) => index === 0)[0],
-  )
-
-  // const newPassword = useRef({})
-  // newPassword.current = watch('newPassword', '')
-
-  const [switchFlag, setSwitchFlag] = useState<boolean>(true)
-
-  const [leftRef, { height: leftHeight }] = useMeasure()
-  const [rightRef, { height: rightHeight }] = useMeasure()
 
   return (
     <div className="header-container">
@@ -105,117 +71,28 @@ export const Header = () => {
                 </div>
               )}
             >
-              <Menu.Container style={{ width: 210, overflow: 'hidden' }}>
-                <motion.div
-                  animate={{ x: 70 }}
-                  className="header-dropdown-container"
+              <Menu.Container
+                style={{ width: 210, overflow: 'hidden', fontSize: 20 }}
+              >
+                <Menu.Item
+                  className="menuItem"
+                  onClick={() => setVisible(true)}
+                  style={{ width: 210, overflow: 'hidden', fontSize: 20 }}
                 >
-                  <div className="header-dropdown-left" ref={leftRef}>
-                    {/* <div className="menu-header">
-                      <div className="menu-header-avatar">
-                        <img
-                          src={companySelected.img}
-                          alt={companySelected.name}
-                          className="menu-header-avatar-img"
-                        />
-                      </div>
-                      <div className="menu-header-content">
-                        <ToolTip text={companySelected.name}>
-                          <div className="menu-header-content-company-name">
-                            {companySelected.name}
-                          </div>
-                        </ToolTip>
-                        <div className="menu-header-content-user-role">
-                          {companySelected.role}
-                        </div>
-                      </div>
-                    </div>
-                    <Menu.Separator /> */}
-                    <Menu.Item
-                      className="menuItem"
-                      onClick={() => setVisible(true)}
-                    >
-                      Change Password
-                    </Menu.Item>
+                  Change Password
+                </Menu.Item>
 
-                    {/* <Menu.Item
-                      className="menuItem"
-                      onClick={() => {
-                        translateX.start(-212)
-                        setSwitchFlag(false)
-                      }}
-                    >
-                      <div className="switch-company-button">
-                        <div className="switch-company-button-text">
-                          Switch Company
-                        </div>
-                        <div className="switch-company-button-icon">
-                          <IoIosArrowForward />
-                        </div>
-                      </div>
-                    </Menu.Item> */}
-
-                    <Menu.Item
-                      className="menuItem"
-                      onClick={
-                        () => handleLogout()
-                        // dispatch(userAuthLogoutAction(handleLogout))
-                      }
-                      danger
-                    >
-                      Logout
-                    </Menu.Item>
-                  </div>
-                  {/* <div className="header-dropdown-right" ref={rightRef}>
-                    <Menu.Item
-                      className="menuItem"
-                      onClick={() => {
-                        translateX.start(0)
-                        setSwitchFlag(true)
-                      }}
-                    >
-                      <div className="back-button">
-                        <div className="back-button-icon">
-                          <IoIosArrowBack />
-                        </div>
-                        <div className="back-button-text">Back</div>
-                      </div>
-                    </Menu.Item>
-                    <Menu.Separator />
-                    {companyData.map((company) => {
-                      return (
-                        <div
-                          className="menu-list"
-                          key={company.id}
-                          onClick={() => setCompanySelected(company)}
-                        >
-                          <div className="menu-list-avatar">
-                            <img
-                              src={company.img}
-                              alt={company.name}
-                              className="menu-list-avatar-img"
-                            />
-                          </div>
-                          <div className="menu-list-content">
-                            <ToolTip text={company.name}>
-                              <div className="menu-list-content-company-name">
-                                {company.name}
-                              </div>
-                            </ToolTip>
-                            <div className="menu-list-content-user-role">
-                              {company.role}
-                            </div>
-                          </div>
-                          {companySelected.id === company.id && (
-                            <div className="menu-list-selected">
-                              <MdCheck />
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
-                  </div> */}
-                </motion.div>
+                <Menu.Item
+                  className="menuItem"
+                  onClick={
+                    () => handleLogout()
+                    // dispatch(userAuthLogoutAction(handleLogout))
+                  }
+                  style={{ width: 210, overflow: 'hidden', fontSize: 20 }}
+                  danger
+                >
+                  Logout
+                </Menu.Item>
               </Menu.Container>
             </Dropdown>
             <ChangePasswordModal {...{ visible, setVisible }} />
@@ -335,13 +212,9 @@ const ChangePasswordModal = ({
                 )} */}
           <div style={{ width: '100%' }}>
             {/* <ActivityIndicator animating={passwordLoader}> */}
-            <button title="Submit" color="primary">
-              Submit
-            </button>
+            <Button title="Submit" color="primary" />
             {/* </ActivityIndicator> */}
-            <button title="Cancel" type="button" onClick={handleModalClose}>
-              Cancel
-            </button>
+            <Button title="Cancel" type="button" onClick={handleModalClose} />
           </div>
         </form>
       </div>

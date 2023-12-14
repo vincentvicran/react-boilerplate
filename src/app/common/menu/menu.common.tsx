@@ -1,20 +1,20 @@
-import {colors} from 'src/modules'
+import { colors } from 'src/modules'
 // import { colors, fonts } from "../constants";
 
 const MenuContainer = (props: Com.Menu.MenuProps) => {
-  const {children, className, ...rest} = props
+  const { children, className, ...rest } = props
   return (
-    <div className={`menu-container ${className}`} {...rest}>
+    <div className={`menu-container ${className ?? ''}`} {...rest}>
       {children}
     </div>
   )
 }
 
 const MenuItem = (props: Com.Menu.MenuItemProps) => {
-  const {children, danger = false, className, style, ...rest} = props
+  const { children, danger = false, className, style, ...rest } = props
   return (
     <button
-      className={`menu-item ${className}`}
+      className={`menu-item ${className ?? ''}`}
       style={{
         color: danger ? colors.base.critical : colors.defaultTextColor,
         ...style,
