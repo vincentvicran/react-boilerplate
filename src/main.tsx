@@ -9,12 +9,12 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 import { AuthProvider } from './app/routing'
 import { Routes } from './app/routing/routes'
-import { SideNav } from './app/routing/sideNav/'
+// import { SideNav } from './app/routing/sideNav/'
 
 const MemoChild = () => {
   return (
     <AuthProvider>
-      <SideNav />
+      {/* <SideNav /> */}
       <App />
     </AuthProvider>
   )

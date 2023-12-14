@@ -11,9 +11,9 @@ const ProtectedAuth = () => {
   const canAccess = useCanAccessRoute()
   return auth?.isLoggedin ? (
     canAccess?.length > 0 ? (
-      <CompWrapper>
-        <Outlet />
-      </CompWrapper>
+      //<CompWrapper>
+      //</CompWrapper>
+      <Outlet />
     ) : (
       <Navigate to="/" state={{ from: location }} replace />
     )
