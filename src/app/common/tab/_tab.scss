@@ -1,0 +1,247 @@
+// .tab {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 20px;
+
+//   &-title {
+//     font-size: 20px;
+//     display: flex;
+//     justify-content: flex-start;
+//     color: red;
+
+//     gap: 10px;
+//     cursor: pointer;
+//     &-left .active {
+//       border-bottom: 2px solid black;
+//     }
+//   }
+
+//   &-content {
+//     padding: 10px;
+//     border: 1px solid blue;
+//   }
+
+//   &-item .inactive {
+//     border: none;
+//   }
+// }
+
+// TAB STYLES
+
+$green: #5b9540;
+$purple: #a259f4;
+$red: #ff4343;
+$yellow: #ffcc00;
+$blue: #297fd6;
+$orange100: #ff6600;
+
+.tab {
+  @include flex(stretch, flex-start, column);
+
+  &-trigger-element {
+    @include flex;
+  }
+
+  &-title {
+    display: flex;
+    border-bottom: 1px solid map-get($border, 'light');
+    align-items: center;
+
+    &-left {
+      flex: 1;
+      display: flex;
+      align-items: center;
+
+      .tab-item {
+        padding: 10px 12px;
+        font-size: 14px;
+        cursor: pointer;
+        color: $black200;
+        position: relative;
+        border-radius: 4px 4px 0 0;
+        // background-color: lighten($red, 30%);
+        transition: all 0.2s ease-in-out;
+        margin: 0px 2px;
+
+        &.submitted {
+          background-color: lighten($green, 40%);
+        }
+
+        &.notsubmitted {
+          background-color: lighten($red, 30%);
+        }
+        &.cantbeentered {
+          background-color: lighten(red, 35%);
+        }
+
+        &.tempsubmitted {
+          background-color: lighten($yellow, 30%);
+        }
+
+        &-indicator {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          height: 5px;
+          width: 5px;
+
+          padding: 2px;
+          border-radius: 50%;
+          background-color: map-get($base, 'success');
+          font-size: 10px;
+          text-align: center;
+          color: $white;
+
+          &.red {
+            background-color: map-get($base, 'critical');
+          }
+
+          &.green {
+            background-color: map-get($base, 'success');
+          }
+
+          &.yellow {
+            background-color: map-get($base, 'warning');
+          }
+
+          &.orange {
+            background-color: lighten($orange100, 20%);
+          }
+
+          &-badge {
+            @extend .tab-item-indicator;
+            top: -2px;
+            right: -3px;
+            height: 16px;
+            width: max-content;
+            min-width: 16px;
+            padding: 2px;
+
+            &.red {
+              background-color: map-get($base, 'critical');
+            }
+
+            &.green {
+              background-color: map-get($base, 'success');
+            }
+
+            &.yellow {
+              background-color: map-get($base, 'warning');
+            }
+
+            &.orange {
+              background-color: lighten($orange100, 20%);
+            }
+          }
+        }
+
+        &:first-child {
+          margin-left: 0px;
+        }
+
+        &:last-child {
+          margin-right: 0px;
+        }
+
+        &:hover {
+          background: map-get($action, 'inverted', 'hovered');
+        }
+
+        &.active {
+          background: map-get($action, 'primary', 'default');
+          color: $white;
+
+          // &::after {
+          //   position: absolute;
+          //   content: '';
+          //   width: 100%;
+          //   height: 4px;
+          //   top: 100%;
+          //   left: 0;
+          //   background: darken($primary100, 10%);
+
+          //   animation: zoomAnimation 0.1s;
+
+          //   @keyframes zoomAnimation {
+          //     from {
+          //       transform: scale(0);
+          //     }
+          //     to {
+          //       transform: scale(1);
+          //     }
+          //   }
+          // }
+        }
+      }
+    }
+
+    // &-right {
+    // }
+  }
+
+  //   &-content {}
+}
+
+// TAB STYLES
+.vertical-tab {
+  display: flex;
+
+  &-titles {
+    margin-right: 20px;
+    border-right: 1px solid map-get($border, 'light');
+    width: 200px;
+    min-width: 200px;
+
+    .tab-item {
+      padding: 10px 12px;
+      cursor: pointer;
+      color: $black200;
+      position: relative;
+      border-radius: 4px 0 0 4px;
+      transition: all 0.2s ease-in-out;
+
+      &:first-child {
+        margin-left: 0px;
+      }
+
+      &:last-child {
+        margin-right: 0px;
+      }
+
+      &:hover {
+        background: map-get($action, 'inverted', 'hovered');
+      }
+
+      &.active {
+        background: map-get($action, 'primary', 'default');
+        color: $white;
+
+        // &::after {
+        //   position: absolute;
+        //   content: '';
+        //   width: 4px;
+        //   height: 100%;
+        //   top: 0%;
+        //   right: 0;
+        //   background: darken($primary100, 10%);
+
+        //   animation: zoomAnimation 0.1s;
+
+        //   @keyframes zoomAnimation {
+        //     from {
+        //       transform: scale(0);
+        //     }
+        //     to {
+        //       transform: scale(1);
+        //     }
+        //   }
+        // }
+      }
+    }
+  }
+
+  &-body {
+    margin-top: -10px;
+    width: 100%;
+  }
+}

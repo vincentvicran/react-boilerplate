@@ -1,0 +1,41 @@
+.info-bar {
+  @include flex-stretch-start;
+  flex-direction: column;
+  padding: 18px 30px;
+  border-radius: 4px;
+  gap: 10px;
+
+  &.info {
+    background-color: rgba(map-get($base, 'primary'), 0.12);
+  }
+
+  &.success {
+    background-color: rgba(map-get($base, 'success'), 0.12);
+  }
+
+  &.warning {
+    background-color: rgba(map-get($base, 'warning'), 0.12);
+  }
+
+  &.error {
+    background-color: rgba(map-get($base, 'critical'), 0.12);
+  }
+
+  &.primary {
+    background-color: rgba($teal, 0.12);
+  }
+
+  &-container {
+    @include flex(center, flex-start, row);
+
+    .info-bar-icon {
+      width: 20px;
+      @include flex(center, flex-start, row);
+    }
+
+    .info-bar-text {
+      padding-left: 10px;
+      font-size: 14px;
+    }
+  }
+}

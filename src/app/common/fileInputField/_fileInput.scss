@@ -1,0 +1,51 @@
+.fileInputCustom {
+  & > .input-interface {
+    font-size: 14px !important;
+    position: relative;
+    width: 100%;
+    border-radius: map-get($radius, "default");
+    border: 1px solid $backgroundColor !important;
+    color: #000;
+    height: 52px;
+    outline: none;
+    padding: 8px 14px !important;
+    background: $backgroundColor !important;
+    resize: none;
+    cursor: pointer;
+
+    @include flex($justify-value: space-between);
+    & > .text {
+      color: map-get($text, "disabled");
+      cursor: default;
+    }
+
+    & > .icon {
+      color: $buttonPrimary;
+      font-size: large;
+    }
+    &:hover {
+      transition: all 0.3s ease-in-out;
+      border: 1px solid $buttonPrimary !important;
+    }
+
+    &:focus {
+      outline-offset: 0px;
+      outline: none;
+      border: 1px solid $buttonPrimary !important;
+      &::placeholder {
+        color: map-get($text, "disabled");
+      }
+
+      &:hover {
+        transition: all 0.3s ease-in-out;
+        border: 1px solid $buttonPrimary !important;
+      }
+
+      &:focus {
+        outline-offset: 0px;
+        outline: none;
+        border: 1px solid $buttonPrimary !important;
+      }
+    }
+  }
+}

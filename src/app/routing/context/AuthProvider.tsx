@@ -27,7 +27,7 @@ interface ContextProps {
 }
 
 const defaultValue: ContextProps = {
-  auth: { isLoggedin: false, role: '' },
+  auth: { isLoggedin: false, role: 'USER' },
   setAuth: () => {},
   authLoading: true,
   user: undefined,
@@ -86,7 +86,7 @@ export const AuthProvider = memo(({ children }: any) => {
     } else {
       loginFailure()
     }
-  }, [])
+  }, [handleLogin])
 
   if (authLoading) {
     return <div>Redirecting...</div>

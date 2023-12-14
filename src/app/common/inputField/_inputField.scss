@@ -1,0 +1,206 @@
+.input-field-container {
+  position: relative;
+  width: 100%;
+  & .password-icon {
+    position: absolute;
+    right: 10px;
+    top: 2px;
+    height: 90%;
+    color: map-get($text, "secondary");
+    user-select: none;
+    cursor: pointer;
+    background: map-get($base, "surface");
+  }
+
+  & .search-icon {
+    @extend .password-icon;
+    font-size: 18px;
+  }
+
+  & .input-error {
+    position: absolute;
+    width: 100%;
+    bottom: -16px;
+    left: 0;
+    color: map-get($base, "critical");
+    font-size: 10px;
+    padding: 2px 0;
+  }
+}
+
+.textarea {
+  font-size: 14px !important;
+  position: relative;
+  width: 100%;
+  border-radius: map-get($radius, "default");
+  border: 1px solid $backgroundColor !important;
+  color: #000;
+  outline: none;
+  padding: 8px 14px !important;
+  background: $backgroundColor !important;
+  resize: none;
+
+  &::placeholder {
+    color: map-get($text, "disabled");
+  }
+
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    border: 1px solid $buttonPrimary !important;
+  }
+
+  &:focus {
+    outline-offset: 0px;
+    outline: none;
+    border: 1px solid $buttonPrimary !important;
+    &::placeholder {
+      color: map-get($text, "disabled");
+    }
+
+    &:hover {
+      transition: all 0.3s ease-in-out;
+      border: 1px solid $buttonPrimary !important;
+    }
+
+    &:focus {
+      outline-offset: 0px;
+      outline: none;
+      border: 1px solid $buttonPrimary !important;
+    }
+  }
+}
+
+.inputfield {
+  font-size: 14px;
+  position: relative;
+  width: 100%;
+  border-radius: map-get($radius, "default");
+  border: 1px solid $backgroundColor;
+  color: #000;
+  height: 52px;
+  outline: none;
+  padding: 8px 14px;
+  //   background-color: map-get($base, "surface");
+  background-color: $backgroundColor;
+  //   color: map-get($text, "primary");
+  resize: none;
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    appearance: textfield;
+    font-size: 14px;
+  }
+
+  &.line-item {
+    outline: none;
+    background-color: transparent;
+    text-align: center;
+    padding: 0;
+    padding-bottom: 3px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid map-get($border, "secondary");
+  }
+
+  &.branch-details {
+    outline: none;
+    background-color: transparent;
+    text-align: left;
+    padding: 0;
+    padding-bottom: 3px;
+    border-radius: 0;
+    border: none;
+    width: fit-content;
+  }
+
+  &::placeholder {
+    color: map-get($text, "disabled");
+  }
+
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    border: 1px solid $buttonPrimary;
+  }
+
+  &:focus {
+    outline-offset: 0px;
+    outline: none;
+    border: 1px solid $buttonPrimary;
+  }
+
+  &.error {
+    border: 1px solid map-get($base, "critical");
+    &.line-item {
+      border: none;
+      border-bottom: 1px solid map-get($base, "critical");
+    }
+
+    &:focus {
+      border: 1px solid map-get($base, "critical");
+      &.line-item {
+        border: none;
+        border-bottom: 1px solid map-get($base, "critical");
+      }
+    }
+  }
+
+  &.disabled {
+    color: map-get($text, "secondary");
+    &:hover {
+      cursor: not-allowed;
+      border: 1px solid map-get($text, "disabled");
+      &.line-item {
+        border: none;
+        border-bottom: 1px solid map-get($text, "disabled");
+      }
+    }
+  }
+
+  &.password {
+    padding-right: 16px;
+  }
+
+  &.nepali {
+    font-family: Preeti;
+    font-size: 14px;
+    font-weight: 500;
+
+    &::placeholder {
+      color: map-get($text, "disabled");
+      font-size: 14px;
+    }
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}

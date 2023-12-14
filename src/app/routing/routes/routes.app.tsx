@@ -12,7 +12,7 @@ import {
 
 import type { RouteObject } from 'react-router-dom'
 
-export const Router: RouteObject[] = [
+export const Routes: RouteObject[] = [
   {
     element: <PublicAuth />,
     children: [

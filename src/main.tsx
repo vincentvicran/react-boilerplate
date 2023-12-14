@@ -8,11 +8,13 @@ import './sass/main.scss'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import { AuthProvider } from './app/routing'
-import { Router } from './app/routing/routes'
+import { Routes } from './app/routing/routes'
+import { SideNav } from './app/routing/sideNav/'
 
 const MemoChild = () => {
   return (
     <AuthProvider>
+      <SideNav />
       <App />
     </AuthProvider>
   )
@@ -21,7 +23,7 @@ const MemoChild = () => {
 const App = () => {
   return (
     <main className="main-app">
-      {useRoutes(Router)}
+      {useRoutes(Routes)}
       <Toaster position="bottom-right" reverseOrder={false} />
     </main>
   )
